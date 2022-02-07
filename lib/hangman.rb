@@ -25,8 +25,7 @@ class Hangman
     @wrong_letters = []
   end
 
-  def play
-    display_rules
+  def propose_load
     puts 'Would you like to load a saved game? y/n'
     answer = ''
     begin
@@ -37,6 +36,11 @@ class Hangman
       retry
     end
     load if answer == 'y'
+  end
+
+  def play
+    display_rules
+    propose_load if File.file?(SAVE_PATH)
     while right_letters.include?(EMPTY) && self.attempts > 0
       play_round
     end
