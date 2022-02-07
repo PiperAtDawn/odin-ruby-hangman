@@ -25,19 +25,6 @@ class Hangman
     @wrong_letters = []
   end
 
-  def propose_load
-    puts 'Would you like to load a saved game? y/n'
-    answer = ''
-    begin
-      answer = gets.chomp.downcase
-      raise unless answer =~ /[yn]/
-    rescue
-      puts 'Incorrect input'
-      retry
-    end
-    load if answer == 'y'
-  end
-
   def play
     display_rules
     propose_load if File.file?(SAVE_PATH)
@@ -55,6 +42,19 @@ class Hangman
   end
 
   private
+
+  def propose_load
+    puts 'Would you like to load a saved game? y/n'
+    answer = ''
+    begin
+      answer = gets.chomp.downcase
+      raise unless answer =~ /[yn]/
+    rescue
+      puts 'Incorrect input'
+      retry
+    end
+    load if answer == 'y'
+  end
 
   def display_letters(letters)
     str = letters.join(' ')
